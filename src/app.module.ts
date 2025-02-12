@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-//import { User } from './user.entity'; // Create user entity 
-//import { UserModule } from './user/user.module'; // create this module
-//import { UserModule } from './user/user.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { User } from './typeorm/entities/User';
+//import { UsersModule } from './users/users.module';
+//import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -13,10 +15,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',           // MySQL username
       password: 'kW558ZqVpFO8',  // MySQL password
       database: 'Mandiga',  // Your MySQL database name
-      autoLoadEntities: true, //entities: [User],           // Define the entities here
+      entities: [User],
+      //autoLoadEntities: true, //entities: [User],           // Define the entities here
       synchronize: true,          // Set to false in production
     }),
-    //UserModule,
+    //UsersModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
